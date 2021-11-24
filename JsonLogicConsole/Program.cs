@@ -1,8 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using JsonLogic.Net;
-using Newtonsoft.Json;
-
-var input = new
+﻿var input = new
 {
     Name = "John Doe",
     Age = 23,
@@ -11,11 +7,8 @@ var input = new
 
 var rule = File.ReadAllText(@$"sample.json");
 
-var evaluator = new JsonLogicEvaluator(EvaluateOperators.Default);
-
-var result = evaluator.Apply(rule, input);
-
-if (result.IsTruthy())
+var rules = new RowRules.RowRules();
+if (rules.EvaluateData(input, rule))
     Console.WriteLine("Truth!");
 else
     Console.WriteLine("Lie!");
